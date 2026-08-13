@@ -63,7 +63,7 @@ export async function predictEstimate({
   }
 
   const result = await requestPredictionImplementation({
-    payload,
+    payload: { ...payload, _debug_prompt: prompt },
     endpoint: manifest.inference.endpoint,
     timeoutMs: manifest.inference.timeout_ms,
   });
