@@ -1,0 +1,15 @@
+{
+  "name": "claude-token-counter",
+  "owner": {
+    "name": "nkanthed06"
+  },
+  "plugins": [
+    {
+      "name": "claude-token-counter",
+      "source": ".",
+      "description": "Real-time token cost estimation and environmental impact tracking for Claude Code CLI",
+      "version": "0.2.0",
+      "defaultEnabled": false
+    }
+  ]
+}

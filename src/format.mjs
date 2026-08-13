@@ -18,42 +18,42 @@ function replyRow(estimate) {
     const confidence = estimate.predictionConfidence === 'low'
       ? ', low confidence'
       : '';
-    return ['Predicted reply', `${number(estimate.predictedOutputTokens)} tokens (80% ${range}${confidence})`];
+    return ['📝 Predicted reply', `${number(estimate.predictedOutputTokens)} tokens (80% ${range}${confidence})`];
   }
 
   if (estimate.modelSupported === false) {
-    return ['Reply length', `not predicted, ${estimate.model ?? 'this model'} is unsupported`];
+    return ['📝 Reply length', `not predicted, ${estimate.model ?? 'this model'} is unsupported`];
   }
 
   const suffix = estimate.estimatorUnavailable ? ' (estimator offline, flat assumption)' : '';
-  return ['Assumed reply', `${number(estimate.expectedOutputTokens)} tokens${suffix}`];
+  return ['📝 Assumed reply', `${number(estimate.expectedOutputTokens)} tokens${suffix}`];
 }
 
 /** The message shown in place of the prompt when the gate pauses it. */
 export function formatEstimate(estimate, { contextAvailable = true, sessionTotals = {} } = {}) {
   const rows = [
-    ['Estimated cost', estimate.formattedTotal],
-    ['This prompt', `${number(estimate.characters)} chars ~ ${number(estimate.promptTokens)} tokens`],
+    ['💰 Estimated cost', estimate.formattedTotal],
+    ['⌨️  This prompt', `${number(estimate.characters)} chars ~ ${number(estimate.promptTokens)} tokens`],
     [
-      'Context re-sent',
+      '📚 Context re-sent',
       contextAvailable
         ? `${number(estimate.contextTokens)} tokens`
         : 'first turn, nothing carried in yet',
     ],
     replyRow(estimate),
-    ['Model', estimate.model ?? `unknown, priced as ${estimate.family}`],
+    ['🤖 Model', estimate.model ?? `unknown, priced as ${estimate.family}`],
   ];
 
   if (estimate.environmental?.formatted) {
     rows.push([
-      'Water usage',
+      '💧 Water usage',
       estimate.environmental.formatted,
     ]);
   }
 
   if (sessionTotals.sessionTokens > 0) {
     rows.push([
-      'Session so far',
+      '📊 Session so far',
       `${number(sessionTotals.sessionTokens)} tokens, ${formatUsd(sessionTotals.sessionCost)}`,
     ]);
   }
